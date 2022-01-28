@@ -22,7 +22,7 @@ const userSchema = new Schema({
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    data:{
+    date:{
         type: Date,
         default: Date.now
     }, 

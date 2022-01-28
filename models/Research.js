@@ -22,7 +22,8 @@ const ResearchSchema = mongoose.Schema({
         },
         created_by:{ 
             type :Schema.Types.ObjectId,
-            ref : "User"
+            ref : "User",
+            required:true
         },
         replies :[{
             reply_id: String,
@@ -30,11 +31,15 @@ const ResearchSchema = mongoose.Schema({
             date: Date,
             replied_by : {
                 type : Schema.Types.ObjectId,
-                ref: "User"
+                ref: "User",
+                required:true
             }
         }]
     }],
-    discription:String,
+    discription:{
+        type: String,
+        required : true
+    },
     authors:[{type: Schema.Types.ObjectId, ref="User" }],
     date : {
         type: Date,

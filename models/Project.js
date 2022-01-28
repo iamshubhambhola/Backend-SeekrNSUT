@@ -4,7 +4,8 @@ const ProjectSchema = mongoose.Schema({
     title : {
         type: String,
         required: true,
-        trim:true
+        trim:true,
+        minlength:3
     },
     project_links : {
         live_link: String,
@@ -24,7 +25,8 @@ const ProjectSchema = mongoose.Schema({
         },
         created_by:{ 
             type :Schema.Types.ObjectId,
-            ref : "User"
+            ref : "User",
+            required: true
         },
         replies :[{
             reply_id: String,
