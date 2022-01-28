@@ -40,13 +40,11 @@ const userSchema = new Schema({
     },
     projects:[{type: Schema.Types.ObjectId, ref="Project" }],
     researchPapers:[{type: Schema.Types.ObjectId, ref="Research" }],
-    socialLinks : [
-        {
+    socialLinks : [{
         githubLink: String,
         googleScholarProfileLink: String,
         linkedIn :String
-    }
-    ],
+    }],
     resumeId:{
         type: String,
         unique: true
@@ -70,10 +68,11 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref="WorkExperience"
     }],
-    bookmarks: [{
+    bookmarksResearch: [{
         type: Schema.Types.ObjectId,
         ref: "Research"
-    },{
+    }],
+    bookmarksProject: [{
         type: Schema.Types.ObjectId,
         ref: "Project"
     }],
