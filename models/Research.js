@@ -36,7 +36,7 @@ const ResearchSchema = mongoose.Schema({
             }
         }]
     }],
-    discription:{
+    description:{
         type: String,
         required : true
     },

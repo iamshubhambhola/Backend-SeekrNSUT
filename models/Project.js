@@ -39,8 +39,8 @@ const ProjectSchema = mongoose.Schema({
         }]
 
     }],
-    discription:String,
-    contributers:[{type: Schema.Types.ObjectId, ref="User" }],
+    description:String,
+    contributors:[{type: Schema.Types.ObjectId, ref="User" }],
     date : {
         type: Date,
         default : Date.now
