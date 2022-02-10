@@ -1,8 +1,10 @@
 // require the library
 const mongoose = require('mongoose');
+const config = require("config");
+const dbUrl = config.get("mongoURI");
 
 // connect to database
-mongoose.connect('mongodb://localhost/contacts_list_db');
+mongoose.connect(dbUrl);
 
 // aquire the connection(to check if it is successful)
 const db = mongoose.connection;

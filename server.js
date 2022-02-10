@@ -6,6 +6,14 @@ const app =express();
 
 app.set('view engine' , 'ejs');
 app.set('views', path.join(__dirname , 'views'));
+
+
+
+app.use(express.json({ extended: false }));
+
+
+app.use("/api/users", require("./routes/users"));
+app.use("/api/auth", require("./routes/auth"));
  
 
 app.get('/', (req, res) => {
