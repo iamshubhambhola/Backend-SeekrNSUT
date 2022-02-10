@@ -7,7 +7,7 @@ const dbUrl = config.get("mongoURI");
 mongoose.connect(dbUrl);
 
 // aquire the connection(to check if it is successful)
-const db = mongoose.connection;
+const db = mongoose.connection; 
 
 //  do this if error
 db.on('error' , console.error.bind(console , 'error connecting to db'));
