@@ -33,9 +33,8 @@ const userSchema = new Schema({
     role : {
         type: String,
     },
-    projects:[{type: Schema.Types.ObjectId,
-        ref: "Project" }],
-    researchPapers:[{type: Schema.Types.ObjectId, ref: "Research" }],
+    projects:[{type: Schema.Types.ObjectId, ref:"Project" }],
+    researchPapers:[{type: Schema.Types.ObjectId, ref:"Research" }],
     socialLinks : [{
         githubLink: String,
         googleScholarProfileLink: String,
@@ -62,7 +61,7 @@ const userSchema = new Schema({
     }], 
     workExperience: [{
         type: Schema.Types.ObjectId,
-        ref: "WorkExperience"
+        ref:"WorkExperience"
     }],
     bookmarksResearch: [{
         type: Schema.Types.ObjectId,
@@ -72,8 +71,8 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Project"
     }],
-    followers:[{type: Schema.Types.ObjectId, ref: "User" }],
-    following:[{type: Schema.Types.ObjectId, ref: "User" }],
+    followers:[{type: Schema.Types.ObjectId, ref:"User" }],
+    following:[{type: Schema.Types.ObjectId, ref:"User" }],
     organisation: [{
         type: Schema.Types.ObjectId,
         ref:"Organisation"
