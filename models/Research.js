@@ -40,7 +40,7 @@ const ResearchSchema = mongoose.Schema({
         type: String,
         required : true
     },
-    authors:[{type: Schema.Types.ObjectId, ref="User" }],
+    authors:[{type: Schema.Types.ObjectId, ref : "User" }],
     date : {
         type: Date,
         default : Date.now

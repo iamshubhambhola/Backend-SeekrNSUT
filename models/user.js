@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-
 var validateEmail = function(email) {
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
 };
 
- 
 //create schema
 const userSchema = new Schema({
     name :{
@@ -91,6 +88,4 @@ const userSchema = new Schema({
 },{collection: 'students'});
  
 
-const User = mongoose.model('User',userSchema); 
-
-module.exports = {User}; 
+module.exports = mongoose.model('User',userSchema); 
