@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const port = process.env.PORT || 3000;
+const db = require('./config/mongoose');
 const app =express();
 const session = require('express-session');
 const passport = require('passport');
@@ -14,6 +15,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.urlencoded({extended: true}));
 
 const GitHubStrategy = require('passport-github2').Strategy;
 
@@ -64,42 +66,14 @@ app.get('/auth/github/callback',
     res.redirect('/');
 });
 
+app.use('/api/project', require('./routes/project'));
+app.use('/api/research', require('./routes/research'));
+
 // ********* GITHUB LOGIN : END **********
 
-const db = require('./config/keys').mongoURI;
-const bodyParser= require('body-parser');
-const mongoose = require('mongoose');
-//const bodyParser= require('body-parser');
-app.use(bodyParser.json());
-
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-
-app.use(express.json({ extended: false }));
-
-
-app.use("/api/users", require("./routes/users"));
-app.use("/api/auth", require("./routes/auth"));
-
-
-
-const connectDB = async () => {
-    try { await mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }); console.log('mongodb connected...'); } catch (err) {
-        console.log(err.message); //exit process 1 
-        process.exit(1);
-    }
-}
-connectDB();
-
-
-app.get('/', (req, res) => {
-    res.send("hello")
-})
-
-app.listen(port, function (err) {
-    if (err) {
+app.listen(port , function(err){
+    if(err){
         console.log('error!');
     }
-    console.log(`yups! expreess server is running on port http://localhost:${port} : `, port);
+    console.log(`yups! expreess server is running on port http://localhost:${port} : ` , port);
 })
