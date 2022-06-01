@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const ProjectSchema = mongoose.Schema({
     title : {
@@ -24,7 +25,7 @@ const ProjectSchema = mongoose.Schema({
             required:true
         },
         created_by:{ 
-            type :Schema.Types.ObjectId,
+            type : Schema.Types.ObjectId,
             ref : "User",
             required: true
         },
@@ -40,7 +41,7 @@ const ProjectSchema = mongoose.Schema({
 
     }],
     description:String,
-    contributors:[{type: Schema.Types.ObjectId, ref="User" }],
+    contributors:[{type: Schema.Types.ObjectId, ref:"User" }],
     date : {
         type: Date,
         default : Date.now

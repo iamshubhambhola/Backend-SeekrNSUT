@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const findOrCreate = require('mongoose-findorcreate')
 
 
 
@@ -12,34 +13,29 @@ var validateEmail = function(email) {
 //create schema
 const userSchema = new Schema({
     name :{
-        type: String,
-        required: true,
-        required: 'Name is required'
+        type: String
     },
     profilePicture:{
-        type: String,
+        type: String
     },    
     email:{
         type: String,
-        required: true, 
         lowercase: true,
         unique: true,
         minlength: 3,
-        required: 'Email address is required',
-        validate: [validateEmail, 'Please fill a valid email address'],
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+        // validate: [validateEmail, 'Please fill a valid email address'],
+        // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     password : {
         type: String, 
         select: false,
-        required: true
     },
     role : {
         type: String,
-        required: true, 
     },
-    projects:[{type: Schema.Types.ObjectId, ref:"Project" }],
-    researchPapers:[{type: Schema.Types.ObjectId, ref:"Research" }],
+    projects:[{type: Schema.Types.ObjectId,
+        ref: "Project" }],
+    researchPapers:[{type: Schema.Types.ObjectId, ref: "Research" }],
     socialLinks : [{
         githubLink: String,
         googleScholarProfileLink: String,
@@ -66,7 +62,7 @@ const userSchema = new Schema({
     }], 
     workExperience: [{
         type: Schema.Types.ObjectId,
-        ref:"WorkExperience"
+        ref: "WorkExperience"
     }],
     bookmarksResearch: [{
         type: Schema.Types.ObjectId,
@@ -76,8 +72,8 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Project"
     }],
-    followers:[{type: Schema.Types.ObjectId, ref:"User" }],
-    following:[{type: Schema.Types.ObjectId, ref:"User" }],
+    followers:[{type: Schema.Types.ObjectId, ref: "User" }],
+    following:[{type: Schema.Types.ObjectId, ref: "User" }],
     organisation: [{
         type: Schema.Types.ObjectId,
         ref:"Organisation"
@@ -86,11 +82,15 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     }, 
+    githubId: {
+        type: String,
+        unique: true
+    }
 },{
     timestamps: true,
 },{collection: 'students'});
  
+userSchema.plugin(findOrCreate);
+const User = mongoose.model('User', userSchema); 
 
-const User = mongoose.model('User',userSchema); 
-
-module.exports = {User}; 
+module.exports = User;

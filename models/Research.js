@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 
 const ResearchSchema = mongoose.Schema({
     title : {
@@ -8,7 +8,7 @@ const ResearchSchema = mongoose.Schema({
         trim:true
     },
     research_paper_link : String,
-    research_paper_image:String,
+    research_paper_image: String,
     likes:[{
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -37,10 +37,9 @@ const ResearchSchema = mongoose.Schema({
         }]
     }],
     description:{
-        type: String,
-        required : true
+        type: String
     },
-    authors:[{type: Schema.Types.ObjectId, ref="User" }],
+    authors:[{type: Schema.Types.ObjectId, ref:"User" }],
     date : {
         type: Date,
         default : Date.now
