@@ -2,15 +2,12 @@
 const mongoose = require('mongoose');
 
 // connect to database
-mongoose.connect('mongodb://localhost/contacts_list_db');
 
-// aquire the connection(to check if it is successful)
-const db = mongoose.connection;
-
-//  do this if error
-db.on('error' , console.error.bind(console , 'error connecting to db'));
-
-// up and runnning correctly then do this
-db.once('open' , function(){
-    console.log("succesfully connected to database");
-} )
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = `mongodb+srv://backend-seekrNSUT:${process.env.URI}@cluster0.eebry.mongodb.net/?retryWrites=true&w=majority`;
+const db = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+db.connect(err => {
+  const collection = db.db("test").collection("devices");
+  // perform actions on the collection object
+  db.close();
+});

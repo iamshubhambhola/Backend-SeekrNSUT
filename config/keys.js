@@ -1,1 +1,1 @@
-module.exports = { mongoURI: "mongodb+srv://backend-seekrNSUT:Seekr@IOSD@cluster0.eebry.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" }
+module.exports = { mongoURI: "mongodb+srv://backend-seekrNSUT:<password>@cluster0.eebry.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" }

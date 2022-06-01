@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const db = require('./config/mongoose');
 const app =express();
 const session = require('express-session');
@@ -47,7 +47,7 @@ GITHUB_CLIENT_SECRET = 'a89f217878d8d2180aa792608b5aae891fae677a';
 passport.use(new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    callbackURL: "http://localhost:5000/auth/github/callback"
   },
   //BUG findOrCreate requires required fields.
   function(accessToken, refreshToken, profile, done) {
