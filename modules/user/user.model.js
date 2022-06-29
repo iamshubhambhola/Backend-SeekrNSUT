@@ -14,29 +14,80 @@ const transformFields = [
 
 const UserSchema = new mongoose.Schema(
   {
-    phone_number: {
-      type: String,
-      maxlength: 12,
-      minlength: 12,
+    name :{
+        type: String
     },
-    role: {
-      type: String,
-      default: roles[0],
-      enum: roles,
+    profilePicture:{
+        type: String
+    },    
+    email:{
+        type: String,
+        lowercase: true,
+        unique: true,
+        minlength: 3,
+        // validate: [validateEmail, 'Please fill a valid email address'],
+        // match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
-    blocked: {
-      type: Boolean,
-      default: false,
+    password : {
+        type: String, 
+        select: false,
     },
-    confirmed: {
-      type: Boolean,
-      default: true,
+    role : {
+        type: String,
     },
-    active: {
-      type: Boolean,
-      default: true,
+    projects:[{type: Schema.Types.ObjectId,
+        ref: "Project" }],
+    researchPapers:[{type: Schema.Types.ObjectId, ref: "Research" }],
+    socialLinks : [{
+        githubLink: String,
+        googleScholarProfileLink: String,
+        linkedIn :String
+    }],
+    resumeId:{
+        type: String,
+        unique: true
+    },     
+    userBio: {
+        type: String,
     },
-    otp: Number,
+    skillSet:[{
+        type: Schema.Types.ObjectId,
+        ref: "Skills",
+    }],  
+    accomplishments: [{
+        title: String,
+        description: String,
+        date: {
+            type: Date,
+            default: Date.now
+        },
+    }], 
+    workExperience: [{
+        type: Schema.Types.ObjectId,
+        ref: "WorkExperience"
+    }],
+    bookmarksResearch: [{
+        type: Schema.Types.ObjectId,
+        ref: "Research"
+    }],
+    bookmarksProject: [{
+        type: Schema.Types.ObjectId,
+        ref: "Project"
+    }],
+    followers:[{type: Schema.Types.ObjectId, ref: "User" }],
+    following:[{type: Schema.Types.ObjectId, ref: "User" }],
+    organisation: [{
+        type: Schema.Types.ObjectId,
+        ref:"Organisation"
+    }],
+    date:{
+        type: Date,
+        default: Date.now
+    }, 
+    githubId: {
+        type: String,
+        unique: true
+    }
   },
   {
     timestamps: true,
@@ -83,4 +134,5 @@ UserSchema.methods = {
   },
 };
 
+UserSchema.plugin(findOrCreate);
 module.exports = mongoose.model("User", UserSchema);
